@@ -1,0 +1,12 @@
+---
+# defaults file for mediawiki
+
+instance_type: t2.micro
+security_group: mediawiki_sg
+image: ami-0c322300a1dd5dc79
+keypair: sshkeypair
+region: us-east-1
+count: 2
+dbname: wikidatabase
+dbuser: "{{ vault_dbuser }}"
+dbpassword: "{{ vault_dbpassword }}"

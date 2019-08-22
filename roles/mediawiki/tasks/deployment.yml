@@ -1,0 +1,24 @@
+---
+
+- name: Import the code
+  command: wget https://releases.wikimedia.org/mediawiki/1.33/mediawiki-1.33.0.tar.gz
+  args:
+    chdir: /opt
+
+- name: Install the code install java package"
+  unarchive:
+     src: /opt/mediawiki-1.33.0.tar.gz
+     dest: /var/www
+     mode: 0755
+
+- name: Create sym-link for the package
+  file: path=/var/www/mediawiki src=/var/www/mediawiki-1.33.0 state=link force=yes mode: 0775
+
+- name: http service state
+  service: name=httpd state=started enabled=yes
+
+- name: Enable both the https and http services
+  command: firewall-cmd --add-service=http && firewall-cmd --add-service=https
+
+- name: Configure SELinux to allow httpd to connect to remote database
+  seboolean: name=httpd_can_network_connect_db state=true persistent=yes

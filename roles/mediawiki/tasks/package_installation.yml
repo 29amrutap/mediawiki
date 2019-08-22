@@ -1,0 +1,25 @@
+---
+
+- name: Install packages & common dependencies
+  yum: name={{ item }} state=installed
+  with_items:
+   - selinux-utils
+   - system-config-firewall-tui
+   - httpd24-httpd
+   - php55
+   - php55-php
+   - php55-php-mbstring
+   - php55-php-mysqlnd
+   - libapache2-mod-php5
+   - php55-php-gd
+   - php55-php-xml
+   - mariadb-server
+   - mariadb
+
+
+- name: Enable services
+  service: name={{ item }} state=started enabled=yes
+  with_items:
+   - httpd
+   - mariadb
+   - firewalld

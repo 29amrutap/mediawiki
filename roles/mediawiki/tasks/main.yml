@@ -1,0 +1,6 @@
+---
+# tasks file for mediawiki
+
+import_tasks: package_installation.yml
+import_tasks: database_configuration.yml
+import_tasks: deployment.yml

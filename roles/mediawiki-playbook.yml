@@ -1,0 +1,10 @@
+---
+
+- import_playbook: instance_creation.yml
+
+- name: Install Mediawiki
+  hosts: lampstack
+  become_user: root
+  
+  roles:
+    - mediawiki
